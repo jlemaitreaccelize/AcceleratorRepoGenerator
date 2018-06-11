@@ -8,6 +8,13 @@ Generates or updates following files for accelerator repository based on templat
 
 ## Getting started
 
+### Requirements
+
+Needs xmltodict python library, install it with pip:
+```bash
+pip install xmltodict
+```
+
 ### Generates new repository
 * Create Git repository for the Accelerator.
 * Copy `accelerator_def.xml` from current repository to `.resources/accelerator_def.xml` in accelerator repository.
