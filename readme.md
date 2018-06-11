@@ -4,7 +4,7 @@ Generates or updates following files for accelerator repository based on templat
 * `readme.md`
 * `run_example.py`
 * `LICENSE`
-. `.gitignore`
+* `.gitignore`
 
 ## Getting started
 
