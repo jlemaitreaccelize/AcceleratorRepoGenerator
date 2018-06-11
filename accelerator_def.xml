@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- AcceleratorRepoGenerator definition
+
+https://github.com/Accelize/AcceleratorRepoGenerator
+-->
+<repository>
+    <parameters>
+        <!-- Describes accelerator parameters
+
+        Each parameter must contains:
+            <desc>: Parameter description in markdown format.
+
+        Each parameter can also contains:
+            <value>: Node describing value. Can be present multiple time. Contains:
+                <value>: Value of the value.
+                <desc>: Description on the value in markdown format.
+        -->
+        <start>
+            <!-- "start" method parameters
+
+            Can contains following parameters:
+                <datafile>: The "datafile" parameter
+                <specific name="">: Other specific parameters
+                    "name" specify parameter name. Can be present multiple time.
+            -->
+        </start>
+        <process>
+            <!-- "process" method parameters
+
+            Can contains following parameters:
+                <file_in>: The "file_in" parameter
+                <file_out>: The "file_out" parameter.
+                <specific name="">: Other specific parameters.
+                    "name" specify parameter name. Can be present multiple time.
+            -->
+        </process>
+    </parameters>
+    <output file_out="true">
+        <!-- Describes accelerator processing outputs
+        file_out= If true and "file_out" in process parameters,
+            describes output as "file_out".
+
+        Can contain:
+            <desc>: Custom description of the output in markdown format.
+            <specific name="">: Description of specific values from result.
+                "name" specify result name.
+        -->
+    </output>
+    <template>
+        <!-- Template string substitution
+
+        Add text like it must appear:
+        - Texts can be formatted in Markdown.
+        - Don't forget to enclose str values with " for parameters values.
+        - For multi lines texts. Start lines a the left border of the file
+          (Don't follow XML indentation).
+        - Starting and ending, blanks are automatically striped.-->
+
+        <!-- Name of accelerator (Title of document)-->
+        <accelerator_name></accelerator_name>
+
+        <!-- ID used to invoke accelerator with Apyfal -->
+        <accelerator_id></accelerator_id>
+
+        <!-- Git repository base -->
+        <accelerator_git_base>https://github.com/Accelize/</accelerator_git_base>
+
+        <!-- Name of Git repository directory -->
+        <accelerator_git></accelerator_git>
+
+        <!-- Main accelerator Description -->
+        <accelerator_defription></accelerator_defription>
+
+        <!-- Accelerator features description -->
+        <accelerator_features></accelerator_features>
+
+        <!-- Accelerator limitations description -->
+        <accelerator_limitations></accelerator_limitations>
+
+        <!-- Short description of the example -->
+        <example_description></example_description>
+
+        <!-- Text to add at end of example
+        By example: How to benchmark, how to compare result, ...-->
+        <example_extra_end_text></example_extra_end_text>
+
+        <!-- generated file to add to .gitignore -->
+        <example_gitignore>*_out.*</example_gitignore>
+    </template>
+    <example>
+        <!-- Example sequence. Defines accelerator methods to call
+            to perform the example.
+            Must contains following methods calls:
+                <start>: "apyfal.start()" call.
+                <process>: "apyfal.process()" call. Can be present multiple time.
+
+            Each call can contain:
+                <desc>: Description of the call purpose.
+                <specific name="">: Specific parameters values.
+                    "name" specify parameter name. Can be present multiple time.
+                <specific_output>: Name of the key containing result if
+                    result if is a specific result (not file_out)
+
+            <start> can also contain:
+                <datafile> : value of the datafile parameter.
+
+            <process> can also contain:
+                <file_in> : value of the file_in parameter.
+                <file_out> : value of the file_out parameter.
+            -->
+        <start></start>
+        <process></process>
+    </example>
+</repository>
