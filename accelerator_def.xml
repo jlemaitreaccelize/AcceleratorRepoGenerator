@@ -69,7 +69,7 @@ https://github.com/Accelize/AcceleratorRepoGenerator
         <accelerator_git></accelerator_git>
 
         <!-- Main accelerator Description -->
-        <accelerator_defription></accelerator_defription>
+        <accelerator_description></accelerator_description>
 
         <!-- Accelerator features description -->
         <accelerator_features></accelerator_features>

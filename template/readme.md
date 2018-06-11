@@ -1,6 +1,6 @@
 # ${accelerator_name}
 
-${accelerator_defription}
+${accelerator_description}
 
 ## Features
 
