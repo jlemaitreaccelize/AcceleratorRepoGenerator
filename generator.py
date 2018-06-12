@@ -298,7 +298,7 @@ class Generator:
                     commands_script.append('    %s' % command)
                     if command.lstrip().startswith('result = '):
                         # Print result
-                        commands_script.append('        print("    Result is", result)')
+                        commands_script.append('        print("   Result is", result)')
             self._identifiers["example_script_%s" % key] = '\n'.join(commands_script)
 
         # Output
