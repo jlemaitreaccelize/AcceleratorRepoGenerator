@@ -114,7 +114,8 @@ class Generator:
         for section in parameters:
             method = parameters[section]
             if not method:
-                self._identifiers['parameters_%s' % section] = ''
+                self._identifiers['parameters_%s' % section] = (
+                    'No parameters required.')
                 continue
 
             # Generate parameters description
@@ -187,6 +188,16 @@ class Generator:
         # Get specific output
         output = call.pop('specific_output', None)
 
+        if output:
+            # Get specific result
+            result_variable = 'result = '
+            result_key = '["%s"]' % output
+            result_file = ' -p output.json'
+        else:
+            result_variable = ''
+            result_key = ''
+            result_file = ''
+
         # Get parameters
         generic_params = OrderedDict()
         specific_params = OrderedDict()
@@ -208,14 +219,6 @@ class Generator:
             '%s=%s' % (key, all_parameters[key])
             for key in all_parameters])
 
-        if output:
-            # Get specific result
-            result_variable = 'result = '
-            result_key = '["%s"]' % output
-        else:
-            result_variable = ''
-            result_key = ''
-
         apyfal_command.append('    %smyaccel.%s(%s)%s' % (
             result_variable, method, apyfal_parameters, result_key))
 
@@ -234,10 +237,15 @@ class Generator:
                         for key in specific_params])))
 
         accelerator_command.append(
-            "```bash\nsudo /opt/accelize/accelerator/accelerator %s %s\n```" % (
+            "```bash\nsudo /opt/accelize/accelerator/accelerator %s %s%s\n```" % (
                 '-m %d' % self.COMMAND_MODES[method],
-                ' '.join(['%s %s' % (self.COMMAND_ARGS[param], generic_params[param])
-                    for param in generic_params])))
+                ' '.join(['%s %s' % (
+                    self.COMMAND_ARGS[param], generic_params[param].strip('"'))
+                    for param in generic_params]), result_file))
+
+        if output:
+            accelerator_command.append(
+                ">The result can be found inside the `output.json` file.")
 
         return '\n'.join(apyfal_command), '\n'.join(accelerator_command)
 
@@ -288,6 +296,9 @@ class Generator:
             for command in commands:
                 if '#' not in command:
                     commands_script.append('    %s' % command)
+                    if command.lstrip().startswith('result = '):
+                        # Print result
+                        commands_script.append('        print("    Result is", result)')
             self._identifiers["example_script_%s" % key] = '\n'.join(commands_script)
 
         # Output
