@@ -5,10 +5,14 @@ ${accelerator_description}
 ## Features
 
 ${accelerator_features}
+- Remote or local execution facility
+- Easy to use Python API
 
 ## Limitations
 
 ${accelerator_limitations}
+- Inputs and outputs can't be larger than 30GB.
+- See also limitations from API
 
 ## Parameters
 
