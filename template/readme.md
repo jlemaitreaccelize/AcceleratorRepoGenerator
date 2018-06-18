@@ -1,3 +1,5 @@
+${accelerator_badges}
+
 # ${accelerator_name}
 
 ${accelerator_description}

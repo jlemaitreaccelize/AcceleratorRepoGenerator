@@ -84,6 +84,20 @@ https://github.com/Accelize/AcceleratorRepoGenerator
         By example: How to benchmark, how to compare result, ...-->
         <example_extra_end_text></example_extra_end_text>
 
+        <!-- GitHub Badges
+        Must contains following shorts texts:
+                <subject>: subject or name of the badge.
+
+        Default badges subjects:
+            * AWS
+            * OVH
+
+        Only required for non default badges:
+                <status>: Status or content of the badge.
+                <color>: Color support by https://shields.io/
+        -->
+        <badge></badge>
+
         <!-- generated file to add to .gitignore -->
         <example_gitignore>*_out.*</example_gitignore>
     </template>

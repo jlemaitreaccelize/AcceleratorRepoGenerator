@@ -20,6 +20,21 @@ class Generator:
     # Templates directory
     TEMPLATE_DIR = join(abspath(dirname(__file__)), 'template')
 
+    # Badges markdown
+    BADGE_MARK = '![%s](https://img.shields.io/badge/%s-%s-%s.svg)'
+
+    # Default badges
+    BADGES = {
+        'AWS': {
+            'color': 'orange',
+            'status': 'Supported'
+        },
+        'OVH': {
+            'color': 'blue',
+            'status': 'Supported'
+        }
+    }
+
     # Command line arguments mapping
     COMMAND_ARGS = {
         'datafile': '-i',
@@ -307,6 +322,26 @@ class Generator:
         else:
             self._identifiers['example_output'] = ''
 
+    def _generate_badges(self):
+        """Generate GitHub badges"""
+        badges_template = self._accelerator_def['template']['badge']
+        if not badges_template:
+            return
+        if not isinstance(badges_template, list):
+            badges_template = [badges_template]
+
+        badges = []
+        for badge in badges_template:
+            subject = badge.get("subject")
+            default = self.BADGES.get(subject, dict())
+            status = badge.get("status", default.get('status'))
+            color = badge.get("color", default.get('color', 'lightgrey'))
+            if not subject or not status:
+                continue
+            badges.append(self.BADGE_MARK % (subject, subject.replace(' ', '_'), status, color))
+
+        self._identifiers['accelerator_badges'] = '\n'.join(badges)
+
     def _create_from_template(self):
         """Generate files from template."""
         for file in listdir(self.TEMPLATE_DIR):
@@ -326,6 +361,7 @@ class Generator:
         self._get_template_identifiers()
         self._generate_example()
         self._generate_parameters_paragraphs()
+        self._generate_badges()
         self._create_from_template()
 
 
