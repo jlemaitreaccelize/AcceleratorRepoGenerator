@@ -10,9 +10,8 @@ Generates or updates following files for accelerator repository based on templat
 
 ### Requirements
 
-Needs Git.
-
-Needs xmltodict python library, install it with pip:
+* *Git*
+* *xmltodict* Python library, install it with pip:
 ```bash
 pip install xmltodict
 ```
@@ -27,3 +26,6 @@ pip install xmltodict
 ### Update repository
 * (Optional) Edit `.resources/accelerator_def.xml` using accelerator information.
 * run `./generator.py --path AcceleratorRepositoryPath`.
+
+### Update multiple repositories
+* run `./generator.py --batch --path DirectoryContainingRepositories`.

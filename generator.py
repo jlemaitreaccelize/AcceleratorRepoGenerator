@@ -4,7 +4,7 @@
 import argparse
 from collections import OrderedDict
 from os import listdir
-from os.path import join, abspath, dirname
+from os.path import join, abspath, dirname, isfile
 from string import Template
 from subprocess import Popen
 
@@ -387,9 +387,42 @@ if __name__ == "__main__":
         description='Generate or update Accelerator repository files. '
         'Require a file ".resources/accelerator_def.xml" in repository path.')
     parser.add_argument('--path', default='.',
-                        help='Path to the repository directory.')
+                        help='Path to the repository directory '
+                             '(Or directory containing multiple '
+                             'repositories with --batch).')
+    parser.add_argument('--batch', action='store_true',
+                        help='Search for repositories in path and '
+                             'git pull, update, git commit, git push '
+                             'all of them.')
     args = parser.parse_args()
 
-    repository = abspath(args.path)
-    xml_path = join(repository, '.resources/accelerator_def.xml')
-    Generator(dest_path=repository, accelerator_def=xml_path).generate()
+    # Update multiple repositories on origin
+    if args.batch:
+        directory = abspath(args.path)
+        for name in listdir(directory):
+            # Get repository path and XML path
+            repository = join(directory, name)
+            xml_path = join(repository, '.resources', 'accelerator_def.xml')
+
+            # Check if XML exists
+            if not isfile(xml_path):
+                continue
+
+            # Git pull
+            Popen('git -C "%s" pull' % repository, shell=True).communicate()
+
+            # Update repository
+            Generator(dest_path=repository, accelerator_def=xml_path).generate()
+
+            # Git commit
+            Popen('git -C "%s" commit -a -m "Updated by AcceleratorRepoGenerator"' %
+                  repository, shell=True).communicate()
+
+            # Git push
+            Popen('git -C "%s" push' % repository, shell=True).communicate()
+
+    # Update single repository
+    else:
+        repository = abspath(args.path)
+        xml_path = join(repository, '.resources', 'accelerator_def.xml')
+        Generator(dest_path=repository, accelerator_def=xml_path).generate()

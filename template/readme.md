@@ -67,7 +67,7 @@ You can run the previously explained example of use with Apyfal :
 ${example_output}
 ${example_extra_end_text}
 
-### Using Apyfal step to step
+#### Using Apyfal step to step
 
 This section only explain the use of this particular accelerator. For explanation on Apyfal use and host configuration,
 See ["Getting Started" in Apyfal documentation](https://apyfal.readthedocs.io/en/latest/getting_started.html).
