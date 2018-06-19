@@ -45,27 +45,9 @@ pip install apyfal[all]
 
 ### Using Accelerator with Apyfal
 
-This section only explain the use of this particular accelerator. For explanation on Apyfal use and host configuration,
-See ["Getting Started" in Apyfal documentation](https://apyfal.readthedocs.io/en/latest/getting_started.html).
+#### Running example
 
 ${example_description}
-
-```python
-import apyfal
-
-# 1- Create Accelerator
-with apyfal.Accelerator(accelerator='${accelerator_id}') as myaccel:
-
-    # 2- Configure Accelerator and its host
-    #    Note: This step can take some minutes depending the configured host
-${example_apyfal_start}
-
-    # 3- Process file
-${example_apyfal_process}
-```
-${example_output}
-
-#### Running example
 
 You can clone repository to get examples files, then move to the cloned directory:
 
@@ -84,6 +66,26 @@ You can run the previously explained example of use with Apyfal :
 ```
 ${example_output}
 ${example_extra_end_text}
+
+### Using Apyfal step to step
+
+This section only explain the use of this particular accelerator. For explanation on Apyfal use and host configuration,
+See ["Getting Started" in Apyfal documentation](https://apyfal.readthedocs.io/en/latest/getting_started.html).
+
+```python
+import apyfal
+
+# 1- Create Accelerator
+with apyfal.Accelerator(accelerator='${accelerator_id}') as myaccel:
+    
+    # 2- Configure Accelerator and its host
+    #    Note: This step can take some minutes depending the configured host
+${example_apyfal_start}
+    
+    # 3- Process file
+${example_apyfal_process}
+```
+${example_output}
 
 ### Local execution on cloud instance
 
