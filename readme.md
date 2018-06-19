@@ -10,6 +10,8 @@ Generates or updates following files for accelerator repository based on templat
 
 ### Requirements
 
+Needs Git.
+
 Needs xmltodict python library, install it with pip:
 ```bash
 pip install xmltodict

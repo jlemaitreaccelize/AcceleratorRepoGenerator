@@ -3,9 +3,10 @@
 """This script generate or update Accelerator Git repository"""
 import argparse
 from collections import OrderedDict
-from string import Template
 from os import listdir
 from os.path import join, abspath, dirname
+from string import Template
+from subprocess import Popen
 
 import xmltodict
 
@@ -356,13 +357,29 @@ class Generator:
             with open(join(self._dest_path, file), 'wt') as result_file:
                 result_file.write(result)
 
+    def _git_make_executable(self, path):
+        """Makes a file executable on Unix with Git
+
+        Args:
+            path (str):  file relative path inside
+            repository."""
+
+        Popen('git -C "%s" update-index --chmod=+x "%s"' %
+              (self._dest_path, path), shell=True).communicate()
+
     def generate(self):
         """Generate Repository files"""
+        # Prepares template
         self._get_template_identifiers()
         self._generate_example()
         self._generate_parameters_paragraphs()
         self._generate_badges()
+
+        # Generates files
         self._create_from_template()
+
+        # Make example executable
+        self._git_make_executable('run_example.py')
 
 
 if __name__ == "__main__":
