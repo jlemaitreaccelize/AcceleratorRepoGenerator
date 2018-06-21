@@ -1,0 +1,1 @@
+gzip,tar.gz,HyperFiRe,trng,bmp2jpeg,sha
